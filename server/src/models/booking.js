@@ -5,10 +5,9 @@ class Booking {
   static async create(bookingData) {
     const db = getDB();
     const booking = {
-      listing_id: new ObjectId(String(bookingData.listing_id)),
+      listing_id: String(bookingData.listing_id),
       start_date: new Date(bookingData.start_date),
       end_date: new Date(bookingData.end_date),
-      guest_info: bookingData.guest_info,
       created_at: new Date()
     };
     

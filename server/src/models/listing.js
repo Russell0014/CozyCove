@@ -13,6 +13,7 @@ class Listing {
             price: 1,
             "review_scores.review_scores_rating": 1,
             "address.market": 1,
+            "bedrooms": 1,
             "images.picture_url": 1
           }
         }
@@ -38,6 +39,7 @@ class Listing {
             price: 1,
             "review_scores.review_scores_rating": 1,
             "address.market": 1,
+            "bedrooms": 1,
             "images.picture_url": 1
           }
         }
