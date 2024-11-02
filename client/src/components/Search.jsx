@@ -10,8 +10,7 @@ function Search() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const encodedSearch = encodeURIComponent(search);
-    const response = await fetch(`http://localhost:3000/api/listings/search?location=${encodedSearch}`);
+    const response = await fetch(`http://localhost:3000/api/listings/search?location=${search}`);
     const data = await response.json();
     setSearchResults(data);
     console.log(data);
