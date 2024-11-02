@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SearchResults from "./SearchResults";
+import RandomListings from "./RandomListings";
 
 function Search() {
   const propertyTypes = [
@@ -126,7 +127,15 @@ function Search() {
         </span>
       )}
 
-      <SearchResults results={searchResults} hasSearched={hasSearched} />
+      {hasSearched ? (
+        <SearchResults results={searchResults} hasSearched={hasSearched} />
+      ) : (
+        <>
+          <h1 className="text-2xl font-bold mb-4">Explore Listings</h1>
+          <RandomListings />
+        </>
+
+      )}
     </div>
   );
 }
