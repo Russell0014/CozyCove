@@ -1,40 +1,12 @@
 import PropTypes from 'prop-types';
 
-const SearchResults = ({ results, hasSearched }) => {
+const SearchResults = ({ results = [], hasSearched = false }) => {
 
     if (hasSearched && results.length === 0) {
         return <p className="text-gray-500 text-center p-4">No results found</p>;
     }
-
-    SearchResults.propTypes = {
-        // Validate that results is an array with required methods
-        results: PropTypes.arrayOf(PropTypes.shape({
-            _id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired,
-            images: PropTypes.shape({
-                picture_url: PropTypes.string.isRequired
-            }).isRequired,
-            price: PropTypes.shape({
-                $numberDecimal: PropTypes.string.isRequired
-            }).isRequired,
-            summary: PropTypes.string,
-            address: PropTypes.shape({
-                market: PropTypes.string.isRequired
-            }).isRequired,
-            review_scores: PropTypes.shape({
-                review_scores_rating: PropTypes.number
-            })
-        })),
-        hasSearched: PropTypes.bool
-    };
-
-    // Default props to ensure results is always an array
-    SearchResults.defaultProps = {
-        results: [],
-        hasSearched: false
-    };
-
-    return (
+    
+      return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
             {results.map((result) => (
                 <div
@@ -84,5 +56,27 @@ const SearchResults = ({ results, hasSearched }) => {
         </div>
     );
 };
+
+SearchResults.propTypes = {
+
+        results: PropTypes.arrayOf(PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            images: PropTypes.shape({
+                picture_url: PropTypes.string.isRequired
+            }).isRequired,
+            price: PropTypes.shape({
+                $numberDecimal: PropTypes.string.isRequired
+            }).isRequired,
+            summary: PropTypes.string,
+            address: PropTypes.shape({
+                market: PropTypes.string.isRequired
+            }).isRequired,
+            review_scores: PropTypes.shape({
+                review_scores_rating: PropTypes.number
+            })
+        })),
+        hasSearched: PropTypes.bool
+    };
 
 export default SearchResults;
