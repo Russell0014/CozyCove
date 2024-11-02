@@ -25,9 +25,15 @@ class Listing {
     const db = getDB();
     const query = {};
 
-    if (filters.location) query["address.market"] = filters.location;
-    if (filters.propertyType) query.property_type = filters.propertyType;
-    if (filters.bedrooms) query.bedrooms = parseInt(filters.bedrooms);
+    if (filters.location) {
+      query["address.market"] = { $regex: filters.location, $options: 'i' };
+    }
+    if (filters.propertyType) {
+      query.property_type = { $regex: filters.propertyType, $options: 'i' };
+    }
+    if (filters.bedrooms) {
+      query.bedrooms = parseInt(filters.bedrooms);
+    }
 
     return await db.collection('listingsAndReviews')
       .aggregate([
