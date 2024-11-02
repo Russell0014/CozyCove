@@ -5,9 +5,9 @@ const Booking = require('../models/booking');
 router.post('/', async (req, res) => {
   try {
     const result = await Booking.create(req.body);
-    res.status(201).json({ 
+    res.status(201).json({
       message: 'Booking created successfully',
-      booking_id: result.insertedId 
+      booking_id: result
     });
   } catch (error) {
     res.status(500).json({ error: 'Error creating booking' });
@@ -22,5 +22,18 @@ router.get('/listing/:listingId', async (req, res) => {
     res.status(500).json({ error: 'Error fetching bookings' });
   }
 });
+
+router.get('/:booking_id', async (req, res) => {
+  try {
+    const booking = await Booking.findById(req.params.booking_id);
+    if (!booking) {
+      return res.status(404).json({ error: 'Booking not found' });
+    }
+    res.json(booking);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching booking' });
+  }
+}
+);
 
 module.exports = router;

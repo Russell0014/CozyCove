@@ -1,9 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
 function Booking() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [listing, setListing] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -20,14 +21,50 @@ function Booking() {
             });
     }, [id]);
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        
+        const bookingData = {
+            booking_id: Math.floor(Math.random() * 1000000),
+            listing_id: id,
+            start_date: new Date(formData.get('checkIn')).toISOString(),
+            end_date: new Date(formData.get('checkOut')).toISOString(),
+            name: formData.get('name'),
+            email: formData.get('email'),
+            mobile_phone: formData.get('phone'),
+            postal_address: formData.get('postalAddress'),
+            home_address: formData.get('residentialAddress')
+        };
+        
+        try {
+            const response = await fetch('http://localhost:3000/api/bookings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(bookingData)
+            });
+            
+            const data = await response.json();
+            if (response.ok) {
+                navigate(`/booking-confirmation/${data.booking_id}`);
+            }
+        } catch (error) {
+            console.error('Error creating booking:', error);
+        }
+    };
+
     if (loading) return <div>Loading...</div>;
     if (id != listing._id) return <Navigate to="/404" replace />;
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className='m-10 text-5xl text-center'><span className='font-bold text-red-500'>Booking </span>{listing.name}</h1>
+            <h1 className='m-10 text-5xl text-center'>
+                <span className='font-bold text-red-500'>Booking </span>{listing.name}
+            </h1>
 
-            <form method="POST" action="http://localhost:3000/api/bookings" className="max-w-4xl mx-auto">
+            <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
                 <div className="bg-white rounded-lg shadow-md p-6 mb-6">
                     <h2 className="text-2xl font-semibold mb-4 text-gray-800">Booking Details</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

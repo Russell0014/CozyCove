@@ -4,6 +4,7 @@ class Booking {
   static async create(bookingData) {
     const db = getDB();
     const booking = {
+      booking_id: String(bookingData.booking_id),
       listing_id: String(bookingData.listing_id),
       start_date: new Date(bookingData.start_date),
       end_date: new Date(bookingData.end_date),
@@ -15,8 +16,8 @@ class Booking {
       created_at: new Date()
     };
 
-    const result = await db.collection('bookings').insertOne(booking);
-    return result;
+    await db.collection('bookings').insertOne(booking);
+    return booking.booking_id;
   }
 
   static async findByListingId(listingId) {
@@ -24,6 +25,12 @@ class Booking {
     return await db.collection('bookings')
       .find({ listing_id: String(listingId) })
       .toArray();
+  }
+
+  static async findById(bookingId) {
+    const db = getDB();
+    return await db.collection('bookings')
+      .findOne({ booking_id: String(bookingId) });
   }
 }
 
