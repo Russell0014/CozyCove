@@ -80,7 +80,7 @@ function Search() {
               name="propertyType"
               value={searchParams.propertyType}
               onChange={handleChange}
-              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="px-3 py-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-red-500"
             >
               <option value="">Select property type</option>
               {propertyTypes.map((type) => (
@@ -99,7 +99,7 @@ function Search() {
               name="bedrooms"
               value={searchParams.bedrooms}
               onChange={handleChange}
-              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="px-3 py-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-red-500"
             >
               {[...Array(11)].map((_, i) => (
                 <option key={i} value={i}>
