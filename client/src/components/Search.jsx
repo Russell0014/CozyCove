@@ -36,7 +36,7 @@ function Search() {
     setErrors({});
 
     if (!searchParams.location?.trim()) {
-      setErrors({ location: 'Location is required' });
+      setErrors({ location: 'Please enter a location' });
       return;
     }
 
@@ -54,10 +54,10 @@ function Search() {
 
   return (
     <div className="container mx-auto p-4">
-      <form onSubmit={handleSubmit} className="flex flex-wrap justify-center gap-4 items-center mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-start">
-          <div className="grid text-left">
-            <label htmlFor="location" className="mr-2 whitespace-nowrap">
+      <form onSubmit={handleSubmit} className="mb-6 border border-solid p-4 rounded-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-4">
+          <div className="flex flex-col">
+            <label htmlFor="location" className="mb-2 text-left">
               Location:
             </label>
             <input
@@ -71,8 +71,8 @@ function Search() {
             />
           </div>
 
-          <div className="grid text-left">
-            <label htmlFor="propertyType" className="mr-2 whitespace-nowrap">
+          <div className="flex flex-col">
+            <label htmlFor="propertyType" className="mb-2 text-left">
               Property Type:
             </label>
             <select
@@ -91,8 +91,8 @@ function Search() {
             </select>
           </div>
 
-          <div className="grid text-left">
-            <label htmlFor="bedrooms" className="mr-2 whitespace-nowrap">
+          <div className="flex flex-col">
+            <label htmlFor="bedrooms" className="mb-2 text-left">
               Bedrooms:
             </label>
             <select
@@ -107,19 +107,16 @@ function Search() {
                 </option>
               ))}
             </select>
-
           </div>
 
-          <div className="grid place-items-center h-full">
+          <div className="flex items-center">
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               Search
             </button>
           </div>
-
-
         </div>
       </form>
 
@@ -130,7 +127,6 @@ function Search() {
       )}
 
       <SearchResults results={searchResults} hasSearched={hasSearched} />
-
     </div>
   );
 }

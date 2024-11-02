@@ -11,7 +11,7 @@ const SearchResults = ({ results = [], hasSearched = false }) => {
             {results.map((result) => (
                 <div
                     key={result._id}
-                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 max-w-sm"
                 >
                     <div className="relative h-48">
                         <img
