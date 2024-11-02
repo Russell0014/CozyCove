@@ -18,21 +18,20 @@ function BookingConfirmation() {
                 setIsLoading(false)
             } catch (err) {
                 setError(err.message)
-                setTimeout(() => navigate('/', { replace: true }), 3000)
+                setTimeout(() => navigate('/404', { replace: true }), 3000)
             }
         }
         validateBooking()
     }, [booking_id, navigate])
 
     if (isLoading) {
-        return <Navigate to="/404" replace />
+        return <div className="fixed inset-0 container mx-auto text-center flex flex-col items-center justify-center">
+            <p className="text-gray-600">Loading...</p>
+        </div>
     }
 
     if (error) {
-        return <div className="fixed inset-0 container mx-auto text-center flex flex-col items-center justify-center">
-            <p className="text-xl text-red-500">{error}</p>
-            <p className="text-gray-600">Redirecting to home...</p>
-        </div>
+        return <Navigate to="/404" replace />
     }
 
     return (
