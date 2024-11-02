@@ -67,7 +67,7 @@ function Search() {
               value={searchParams.location}
               onChange={handleChange}
               placeholder="Enter location"
-              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
 
@@ -80,7 +80,7 @@ function Search() {
               name="propertyType"
               value={searchParams.propertyType}
               onChange={handleChange}
-              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
             >
               <option value="">Select property type</option>
               {propertyTypes.map((type) => (
@@ -99,7 +99,7 @@ function Search() {
               name="bedrooms"
               value={searchParams.bedrooms}
               onChange={handleChange}
-              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
             >
               {[...Array(11)].map((_, i) => (
                 <option key={i} value={i}>
@@ -112,7 +112,7 @@ function Search() {
           <div className="flex items-center">
             <button
               type="submit"
-              className="w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
             >
               Search
             </button>
