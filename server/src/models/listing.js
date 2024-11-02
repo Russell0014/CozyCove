@@ -5,7 +5,7 @@ class Listing {
     const db = getDB();
     return await db.collection('listingsAndReviews')
       .aggregate([
-        { $sample: { size: 10 } },
+        { $sample: { size: 6 } },
         {
           $project: {
             name: 1,
