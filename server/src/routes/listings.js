@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Listing = require('../models/listing');
 
-// Get random listings
+// Get random listings for homepage
 router.get('/random', async (req, res) => {
   try {
     const listings = await Listing.getRandomListings();
