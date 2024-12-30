@@ -63,6 +63,12 @@ FRONTEND_URL=http://localhost:5173
 PORT=3000
 ```
 
+5. Create a .env file in the client directory with:
+
+```sh
+VITE_API_URL=http://localhost:3000
+```
+
 ## Running the Application
 
 1. Start the backend server
