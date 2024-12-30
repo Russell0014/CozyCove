@@ -6,7 +6,7 @@ function RandomListings() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/listings/random')
+        fetch(`${import.meta.env.VITE_API_HOST_URL}api/listings/random`)
             .then(response => response.json())
             .then(data => {
                 setListings(data);

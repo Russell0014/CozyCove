@@ -43,7 +43,7 @@ function Search() {
 
     try {
       const queryParams = new URLSearchParams(searchParams).toString();
-      const response = await fetch(`http://localhost:3000/api/listings/search?${queryParams}`);
+      const response = await fetch(`${import.meta.env.VITE_API_HOST_URL}api/listings/search?${queryParams}`);
       if (!response.ok) throw new Error('Search failed');
       const data = await response.json();
       setSearchResults(data);
