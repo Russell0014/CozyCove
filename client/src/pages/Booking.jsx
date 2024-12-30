@@ -9,7 +9,7 @@ function Booking() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/listings/${id}`)
+        fetch(`${import.meta.env.VITE_API_HOST_URL}api/listings/${id}`)
             .then(res => res.json())
             .then(data => {
                 setListing(data);

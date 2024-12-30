@@ -11,7 +11,7 @@ function BookingConfirmation() {
     useEffect(() => {
         const validateBooking = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/bookings/${booking_id}`)
+                const response = await fetch(`${import.meta.env.VITE_API_HOST_URL}api/bookings/${booking_id}`)
                 if (!response.ok) {
                     throw new Error('Booking not found')
                 }
