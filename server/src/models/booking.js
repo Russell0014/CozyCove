@@ -2,7 +2,7 @@ const { getDB } = require('../config/db');
 
 class Booking {
   static async create(bookingData) {
-    const db = getDB();
+    const db = await getDB();
     const booking = {
       booking_id: String(bookingData.booking_id),
       listing_id: String(bookingData.listing_id),
@@ -21,14 +21,14 @@ class Booking {
   }
 
   static async findByListingId(listingId) {
-    const db = getDB();
+    const db = await getDB();
     return await db.collection('bookings')
       .find({ listing_id: String(listingId) })
       .toArray();
   }
 
   static async findById(bookingId) {
-    const db = getDB();
+    const db = await getDB();
     return await db.collection('bookings')
       .findOne({ booking_id: String(bookingId) });
   }
