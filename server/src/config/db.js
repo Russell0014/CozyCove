@@ -2,27 +2,28 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 require('dotenv').config();
 
 const uri = process.env.MONGODB_URI;
-let db;
-
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+let client = null;
+let db = null;
 
 const connectDB = async () => {
   try {
-
-    if(db){
-      console.log('database is already connected');
-      return db;
+    // Create new client if not exists
+    if (!client) {
+      client = new MongoClient(uri, {
+        serverApi: {
+          version: ServerApiVersion.v1,
+          strict: true,
+          deprecationErrors: true,
+        }
+      });
     }
-    
-    await client.connect();
-    db = client.db("sample_airbnb");
-    console.log("Connected to MongoDB Atlas");
+
+    // Connect if not already connected
+    if (!db) {
+      await client.connect();
+      db = client.db("sample_airbnb");
+      console.log("Connected to MongoDB Atlas");
+    }
     return db;
   } catch (error) {
     console.error("MongoDB connection error:", error);
@@ -30,9 +31,9 @@ const connectDB = async () => {
   }
 };
 
-const getDB = () => {
+const getDB = async () => {
   if (!db) {
-    throw new Error('Database not initialized');
+    await connectDB();
   }
   return db;
 };

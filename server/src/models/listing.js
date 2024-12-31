@@ -2,7 +2,7 @@ const { getDB } = require('../config/db');
 
 class Listing {
   static async getRandomListings() {
-    const db = getDB();
+    const db = await getDB();
     return await db.collection('listingsAndReviews')
       .aggregate([
         { $sample: { size: 6 } },
@@ -22,7 +22,7 @@ class Listing {
   }
 
   static async findByFilters(filters) {
-    const db = getDB();
+    const db = await getDB();
     const query = {};
 
     if (filters.location) {
@@ -54,7 +54,7 @@ class Listing {
   }
 
   static async findById(id) {
-    const db = getDB();
+    const db = await getDB();
     return await db.collection('listingsAndReviews').findOne(
       { _id: id },
       {
