@@ -4,11 +4,15 @@ const Listing = require('../models/listing');
 
 // Get random listings for homepage
 router.get('/random', async (req, res) => {
-  try {
-    const listings = await Listing.getRandomListings();
-    res.json(listings);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching random listings' });
+  for(let attempt = 1; attempt <= 10; attempt++) {
+    try {
+      const listings = await Listing.getRandomListings();
+      return res.json(listings);
+    } catch (error) {
+      if(attempt === 10) {
+        return res.status(500).json({ error: 'Error fetching random listings after 10 attempts' });
+      }
+    }
   }
 });
 
