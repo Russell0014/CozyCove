@@ -38,7 +38,7 @@ A full-stack web application for searching and booking unique accommodations, bu
 1. Clone the repository
 
 ```sh
-git clone https://github.com/Russell0014/DB-Assignment-4-s4018548
+git clone https://github.com/Russell0014/CozyCove.git
 ```
 
 2. Install backend dependencies
