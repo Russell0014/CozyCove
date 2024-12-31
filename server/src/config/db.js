@@ -14,6 +14,12 @@ const client = new MongoClient(uri, {
 
 const connectDB = async () => {
   try {
+
+    if(db){
+      console.log('database is already connected');
+      return db;
+    }
+    
     await client.connect();
     db = client.db("sample_airbnb");
     console.log("Connected to MongoDB Atlas");
