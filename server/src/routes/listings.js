@@ -4,16 +4,25 @@ const Listing = require('../models/listing');
 
 // Get random listings for homepage
 router.get('/random', async (req, res) => {
-  for(let attempt = 1; attempt <= 10; attempt++) {
+  for(let attempt = 1; attempt <= 12; attempt++) {
     try {
       const listings = await Listing.getRandomListings();
-      return res.json(listings);
-    } catch (error) {
-      if(attempt === 10) {
-        return res.status(500).json({ error: 'Error fetching random listings after 10 attempts' });
+      
+      if (listings && listings.length > 0) {
+        return res.json(listings);
       }
+      
+    } catch (error) {
+      return res.status(500).json({ 
+        error: 'Database error while fetching random listings',
+        details: error.message 
+      });
     }
   }
+  
+  return res.status(404).json({ 
+    error: 'No listings found after 10 attempts'
+  });
 });
 
 // Search listings with filters
